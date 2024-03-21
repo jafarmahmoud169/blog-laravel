@@ -6,6 +6,7 @@
         <h1 class="display-4">All Posts</h1>
         <a class="btn btn-success" href="{{route('post.create')}}">Create Post</a>
         <a class="btn btn-success" href="{{route('posts.trash')}}">Trash <i class="fa fa-trash"></i></a>
+        <a class="btn btn-success" href="{{route('user.posts')}}">My Posts</a>
         <a class="btn btn-success" href="{{route('tags.index')}}">Tags</a>
         <a class="btn btn-success" href="{{route('users.index')}}">Users</a>
     </div>
@@ -45,7 +46,7 @@
                         <td>{{$item->user->name}}</td>
                         <td>{{$item->title}}</td>
                         <td><img width="100px" height="100px" src="/images/{{$item->photo}}" class="img-fluid rounded" alt="{{$item->photo}}" /></td>
-                        <td><a class="text-success" href="{{route('post.show',['slug'=>$item->slug])}}"><i class="fa fa-2x fa-eye"></i></a> &nbsp;
+                        <td><a class="text-success" href="{{route('post.show',['id'=>$item->id])}}"><i class="fa fa-2x fa-eye"></i></a> &nbsp;
                             @if ($item->user_id==Auth::id())
                             <a href="{{route('post.edit',['id'=>$item->id])}}"><i class="fas fa-2x fa-edit" aria-hidden="true"></i></a> &nbsp;
                             <a class="text-warning" href="{{route('post.sdelete',['id'=>$item->id])}}"><i class="fa fa-2x fa-trash"></i></a>

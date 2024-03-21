@@ -31,6 +31,7 @@ class CommentController extends Controller
     {
         $request->validate([
             'content' => 'required',
+            'post_id'=>'required'
         ]);
         $comment=$request->all();
         $comment['user_id']=Auth::id();

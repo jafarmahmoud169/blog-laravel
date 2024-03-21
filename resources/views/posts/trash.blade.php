@@ -37,7 +37,13 @@
                         <td>{{$item->title}}</td>
                         <td><img width="100px" height="100px" src="/images/{{$item->photo}}" class="img-fluid rounded" alt="{{$item->photo}}" /></td>
                         <td><a class="text-warning" href="{{route('post.restore',['id'=>$item->id])}}"><i class="fas fa-2x fa-undo" aria-hidden="true"></i></a> &nbsp;
-                            <a class="text-danger" href="{{route('post.destroy',['id'=>$item->id])}}"><i class="fa fa-2x fa-trash"></i></a>
+                            {{-- <a class="text-danger" href="{{route('post.destroy',['id'=>$item->id])}}"><i class="fa fa-2x fa-trash"></i></a> --}}
+                            <form action="{{route('post.destroy',['id'=>$item->id])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{-- <a class="text-danger" type="submit"><i class="fa fa-2x fa-trash"></i></a> --}}
+                                    <button type="submit" class="text-danger"><i class="fa fa-2x fa-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

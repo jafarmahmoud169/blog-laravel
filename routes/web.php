@@ -40,12 +40,13 @@ Route::get('/posts', [App\Http\Controllers\PostController::class ,'index'])->nam
 Route::get('/posts/trash',[App\Http\Controllers\PostController::class , 'trash'])->name('posts.trash');
 Route::get('/post/create', [App\Http\Controllers\PostController::class , 'create'])->name('post.create');
 Route::post('/post/store', [App\Http\Controllers\PostController::class ,'store'])->name('post.store');
-Route::get('/post/{slug}', [App\Http\Controllers\PostController::class ,'show'])->name('post.show');
+Route::get('/post/{id}', [App\Http\Controllers\PostController::class ,'show'])->name('post.show');
 Route::get('/post/edit/{id}', [App\Http\Controllers\PostController::class ,'edit'])->name('post.edit');
 Route::put('/post/update/{id}', [App\Http\Controllers\PostController::class ,'update'])->name('post.update');
-Route::any('/post/destroy/{id}',[App\Http\Controllers\PostController::class ,'destroy'])->name('post.destroy');
+Route::delete('/post/destroy/{id}',[App\Http\Controllers\PostController::class ,'destroy'])->name('post.destroy');
 Route::get('post/sdelete/{id}', [App\Http\Controllers\PostController::class,'sdelete'])->name('post.sdelete');
-Route::get('products/restore/{id}', [App\Http\Controllers\PostController::class,'restore'])->name('post.restore');
+Route::get('post/restore/{id}', [App\Http\Controllers\PostController::class,'restore'])->name('post.restore');
+Route::get('posts/user', [App\Http\Controllers\PostController::class, 'userPosts'])->name('user.posts');;
 
 
 
