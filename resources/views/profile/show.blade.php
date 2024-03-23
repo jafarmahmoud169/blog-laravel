@@ -38,7 +38,10 @@
             </div>
         </div>
         <br>
+        @if (Auth::id()==$user->id)
         <a class="btn btn-primary"href="{{ route('profile.edit') }}">Edit</a>
+        <a class="btn btn-danger"href="{{route('user.destroy',['id'=>$user->id])}}">Delete My Account</a>
+        @endif
         <br>
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">

@@ -29,7 +29,6 @@ Auth::routes();
 
 Route::any('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
 Route::any('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-Route::any('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 Route::any('/profile/show', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
 
 
@@ -65,6 +64,7 @@ Route::get('/users', [App\Http\Controllers\UserController::class ,'index'])->nam
 Route::get('/user/create', [App\Http\Controllers\UserController::class , 'create'])->name('user.create');
 Route::post('/user/store', [App\Http\Controllers\UserController::class ,'store'])->name('user.store');
 Route::any('/user/destroy/{id}',[App\Http\Controllers\UserController::class ,'destroy'])->name('user.destroy');
+Route::any('/profile/show/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('user.show');
 
 
 

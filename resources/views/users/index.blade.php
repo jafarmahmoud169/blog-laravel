@@ -20,7 +20,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">NAME</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Profile</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                     <tr>
                         <th scope="row">{{$i++}}</th>
                         <td>{{$item->name}}</td>
-                        <td><a href="{{route('user.destroy',['id'=>$item->id])}}"><i class="fas fa-2x fa-trash" aria-hidden="true"></i></a>
+                        <td><a href="{{route('user.show',['id'=>$item->id])}}"><i class="fa fa-2x fa-eye"></i></a>
                         </td>
                     </tr>
                     @endforeach

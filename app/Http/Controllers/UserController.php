@@ -6,6 +6,7 @@ use App\Models\profile;
 use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -53,6 +54,24 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user added succesfully');
     }
 
+
+
+    function show($id){
+        $user = User::find($id);
+        if ($user->profile==null) {
+            $profile=profile::create([
+                'user_id'=>$id,
+                'country'=>'Syria',
+                'bio'=>'hello.world!',
+                'gender'=>'Male',
+                'age'=>18,
+                'photo'=>'profilenophoto.jfif'
+            ]);
+        }
+        return view('profile.show')->with('user',$user);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */
@@ -60,11 +79,15 @@ class UserController extends Controller
     {
         $user=User::find($id);
         $posts=Post::where('user_id',$id);
+        if ($user->profile->photo != 'noimage.jfif') {
+            File::delete('images/profiles/'.$user->profile->photo);
+        }
+        // if ($posts->photo != 'noimage.jfif') {
+        //     File::delete('images/'.$posts->photo);
+        // }
         $posts->delete();
-        // return dd($user->id);
         $user->profile()->delete();
         $user->delete();
         return redirect()->route('users.index')->with('success', 'user deleted succesfully');
-
     }
 }

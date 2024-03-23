@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use App\Models\profile;
 use Illuminate\Http\Request;
 use Auth;
@@ -10,10 +10,9 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        $user=Auth::user();
-        $id=Auth::id();
+        $user = User::find($id);
         if ($user->profile==null) {
             $profile=profile::create([
                 'user_id'=>$id,
@@ -24,11 +23,10 @@ class ProfileController extends Controller
                 'photo'=>'profilenophoto.jfif'
             ]);
         }
-        //return dd($user);
-        return redirect()->route('profile.show');
     }
 function show(){
 $user=Auth::user();
+$this->index($user->id);
     return view('profile.show')->with('user',$user);
 }
     /**
@@ -85,6 +83,6 @@ $user=Auth::user();
             $user->profile->save();
         }
         //return redirect()->back();
-        return redirect()->route('profile')->with('user',$user)->with('success', 'Profile edited succesfully');
+        return redirect()->route('profile.show')->with('user',$user)->with('success', 'Profile edited succesfully');
     }
 }
