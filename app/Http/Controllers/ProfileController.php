@@ -20,7 +20,8 @@ class ProfileController extends Controller
                 'country'=>'Syria',
                 'bio'=>'hello.world!',
                 'gender'=>'Male',
-                'age'=>18
+                'age'=>18,
+                'photo'=>'profilenophoto.jfif'
             ]);
         }
         //return dd($user);
@@ -43,7 +44,8 @@ $user=Auth::user();
                 'country'=>'Syria',
                 'bio'=>'hello world',
                 'gender'=>'Male',
-                'age'=>18
+                'age'=>18,
+                'photo'=>'profilenophoto.jfif'
             ]);
         }
         //return dd($user);
@@ -73,6 +75,13 @@ $user=Auth::user();
         if ($request->has('password')) {
             $user->password=bcrypt($request->password) ;
             $user->save();
+            $user->profile->save();
+        }
+        if ($request->has('photo')) {
+            $photo = $request->photo;
+            $nphoto = time() . "." . $photo->getClientOriginalExtension();
+            $photo->move('images/profiles', $nphoto);
+            $user->profile->photo =$nphoto;
             $user->profile->save();
         }
         //return redirect()->back();

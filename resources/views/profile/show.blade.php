@@ -8,6 +8,9 @@
             </div>
             <br>
         @endif
+        <div style="text-align: center;">
+            <img src="/images/profiles/{{ $user->profile->photo }}" class="rounded-circle" alt="{{ $user->profile->photo }}" width="200px" height="200px">
+        </div>
         <div class="row row-cols-3 ">
             <div class="col  bg-info ">
                 <label for="Name" class="form-label">Name</label>

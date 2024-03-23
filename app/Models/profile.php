@@ -15,7 +15,8 @@ protected $table ='profile';
         'user_id',
         'country',
         'bio',
-        'age'
+        'age',
+        'photo'
     ];
     /**
      * Get the user that owns the profile

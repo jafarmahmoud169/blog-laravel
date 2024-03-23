@@ -6,9 +6,14 @@
     $genderArray=['Male','Female'];
 @endphp
 <div class="container" style="padding: 3%">
-    <form class="row g-3" action="{{route('profile.update')}}" method="POST">
+    <form class="row g-3" action="{{route('profile.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        <div style="text-align: center;">
+            <img width="200px" height="200px" src="/images/profiles/{{$user->profile->photo}}" class="rounded-circle" alt="{{$user->profile->photo}}" />
+        </div>
+        <input type="file" name='photo' class="form-control" id="inputphoto">
+        <br>
         <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
             <input type="text" name='name'class="form-control" id="inputName" value="{{$user->name}}">

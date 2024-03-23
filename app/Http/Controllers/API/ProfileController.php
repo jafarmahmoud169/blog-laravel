@@ -24,7 +24,8 @@ class ProfileController extends BaseController
                 'country' => 'Syria',
                 'bio' => 'hello.world!',
                 'gender' => 'Male',
-                'age' => 18
+                'age' => 18,
+                'photo'=>'profilenophoto.jfif'
             ]);
         }
         //return dd($user);
@@ -36,7 +37,7 @@ class ProfileController extends BaseController
         $user = Auth::user();
         $this->index($user->id);
         //return dd($user->profile);
-        return $this->sendResponse(new UserResources($user), 'your profile');
+        return $this->sendResponse(new profileResources($user), 'your profile');
     }
 
 
@@ -55,13 +56,6 @@ class ProfileController extends BaseController
 
     public function update(Request $request)
     {
-        // $this->validate($request, [
-        //     'country' => 'required',
-        //     'name' => 'required',
-        //     'gender' => 'required',
-        //     'age' => 'required',
-        // ]);
-        // dd($request);
         $user = Auth::user();
         $this->index($user->id);
         if($request->has('name')) $user->name = $request->name;
@@ -72,8 +66,14 @@ class ProfileController extends BaseController
         if ($request->has('password')) {
             $user->password = bcrypt($request->password);
         }
+        if ($request->has('photo')) {
+            $photo = $request->photo;
+            $nphoto = time() . "." . $photo->getClientOriginalExtension();
+            $photo->move('images/profiles', $nphoto);
+            $user->profile->photo =$nphoto;
+        }
         $user->save();
         $user->profile->save();
-        return $this->sendResponse(new UserResources($user), 'your profile after update');
+        return $this->sendResponse(new profileResources($user), 'your profile after update');
     }
 }

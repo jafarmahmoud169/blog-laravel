@@ -14,6 +14,17 @@ class Profile extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        //return parent::toArray($request);
+        return [
+            'id'=> $this->profile->user_id,
+            'user id'=> $this->id,
+            'user name'=> $this->name,
+            'gender'=> $this->profile->gender,
+            'country'=> $this->profile->country,
+            'age'=> $this->profile->age,
+            'bio'=>$this->profile->bio,
+            'photo'=>base64_encode(file_get_contents(public_path('images\profiles/'.$this->profile->photo)))
+            //'photo'=>$this->profile->photo
+    ];
     }
 }
