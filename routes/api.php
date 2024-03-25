@@ -22,7 +22,7 @@ Route::post('register', [App\Http\Controllers\API\PassportAuthController::class,
 Route::post('login', [App\Http\Controllers\API\PassportAuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    //Route::resource('posts',App\Http\Controllers\API\PostController::class);
+    Route::get('/', [App\Http\Controllers\API\PostController::class, 'index'])->name('posts.index');
     Route::get('/posts', [App\Http\Controllers\API\PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/trash', [App\Http\Controllers\API\PostController::class, 'trash'])->name('posts.trash');
     Route::post('/post/store', [App\Http\Controllers\API\PostController::class, 'store'])->name('post.store');
