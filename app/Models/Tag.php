@@ -21,4 +21,8 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Models\Post');
     }
+    public function profiles()
+    {
+        return $this->belongsToMany('App\Models\profile');
+    }
 }

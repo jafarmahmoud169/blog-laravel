@@ -72,6 +72,9 @@ class ProfileController extends BaseController
             $photo->move('images/profiles', $nphoto);
             $user->profile->photo =$nphoto;
         }
+        if ($request->has('tags')) {
+            $user->profile->tags()->sync($request->tags);
+            }
         $user->save();
         $user->profile->save();
         return $this->sendResponse(new profileResources($user), 'your profile after update');

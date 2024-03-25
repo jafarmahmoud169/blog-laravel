@@ -44,6 +44,18 @@
             <textarea id="inputBio" class="form-control" name='bio' rows="5">{{$user->profile->bio}}</textarea>
         </div>
         <div class="col-12">
+            @foreach ($tags as $item)
+                <input type="checkbox" name='tags[]' id="inputags" value="{{$item->id}}"
+                @foreach ($user->profile->tags as $item2)
+                    @if ($item->id == $item2->id)
+                        checked
+                    @endif
+                @endforeach
+                >
+                <label for="inputtags" class="form-label">{{$item->name}}</label>
+            @endforeach
+        </div>
+        <div class="col-12">
             <button type="submit" class="btn btn-primary">UPDATE</button>
         </div>
     </form>

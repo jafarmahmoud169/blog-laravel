@@ -27,4 +27,8 @@ protected $table ='profile';
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
+    }
 }

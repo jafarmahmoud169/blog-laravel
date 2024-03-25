@@ -23,6 +23,7 @@ class Profile extends JsonResource
             'country'=> $this->profile->country,
             'age'=> $this->profile->age,
             'bio'=>$this->profile->bio,
+            'tags'=>$this->profile->tags,
             'photo'=>base64_encode(file_get_contents(public_path('images\profiles/'.$this->profile->photo)))
             //'photo'=>$this->profile->photo
     ];

@@ -9,7 +9,8 @@
             <br>
         @endif
         <div style="text-align: center;">
-            <img src="/images/profiles/{{ $user->profile->photo }}" class="rounded-circle" alt="{{ $user->profile->photo }}" width="200px" height="200px">
+            <img src="/images/profiles/{{ $user->profile->photo }}" class="rounded-circle" alt="{{ $user->profile->photo }}"
+                width="200px" height="200px">
         </div>
         <div class="row row-cols-3 ">
             <div class="col  bg-info ">
@@ -37,10 +38,21 @@
                 <p id="Bio">{{ $user->profile->bio }}</p>
             </div>
         </div>
+        <div class="row row-cols-8 ">
+            @foreach ($tags as $item)
+                @foreach ($user->profile->tags as $item2)
+                    @if ($item->id == $item2->id)
+                        <div class="col  bg-warning">
+                            {{ $item->name }}
+                        </div>
+                    @endif
+                @endforeach
+            @endforeach
+        </div>
         <br>
-        @if (Auth::id()==$user->id)
-        <a class="btn btn-primary"href="{{ route('profile.edit') }}">Edit</a>
-        <a class="btn btn-danger"href="{{route('user.destroy',['id'=>$user->id])}}">Delete My Account</a>
+        @if (Auth::id() == $user->id)
+            <a class="btn btn-primary"href="{{ route('profile.edit') }}">Edit</a>
+            <a class="btn btn-danger"href="{{ route('user.destroy', ['id' => $user->id]) }}">Delete My Account</a>
         @endif
         <br>
         @if ($errors->any())
