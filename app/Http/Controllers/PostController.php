@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Auth;
 class PostController extends Controller
 {
@@ -15,8 +17,19 @@ class PostController extends Controller
     }
     public function index()
     {
-        $posts = Post::latest()->paginate(5);
-        return view("posts.index", compact('posts'));
+        // $favPosts= Post::
+        // join('post_tag', 'post_tag.post_id', '=', 'posts.id')
+        // ->join('profile_tag', 'profile_tag.tag_id', '=', 'post_tag.tag_id')
+        // ->where('profile_tag.profile_id','=',Auth::user()->profile->id)->paginate(7);
+
+        // $otherPosts =  Post::
+        // join('post_tag', 'post_tag.post_id', '=', 'posts.id')
+        // ->join('profile_tag', 'profile_tag.tag_id', '=', 'post_tag.tag_id')
+        // ->where('profile_tag.profile_id','!=',Auth::user()->profile->id)->paginate(7);;
+
+        $allPosts = Post::latest()->paginate(5);
+        $posts=$allPosts;
+        return view("posts.index",compact('posts'));
     }
     public function trash()
     {
