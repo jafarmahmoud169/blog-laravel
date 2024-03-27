@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\profile;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -57,6 +58,7 @@ class UserController extends Controller
 
 
     function show($id){
+        $tags=Tag::all();
         $user = User::find($id);
         if ($user->profile==null) {
             $profile=profile::create([
@@ -68,7 +70,7 @@ class UserController extends Controller
                 'photo'=>'profilenophoto.jfif'
             ]);
         }
-        return view('profile.show')->with('user',$user);
+        return view('profile.show')->with('user',$user)->with('tags',$tags);
     }
 
 
